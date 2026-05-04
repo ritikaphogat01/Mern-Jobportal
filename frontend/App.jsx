@@ -62,7 +62,7 @@ const App = () => {
   // Fetch all jobs globally
   useEffect(() => {
     const fetchJobs = () => {
-      fetch('/api/jobs')
+      fetch(API_URL + '/api/jobs')
         .then(res => res.json())
         .then(data => {
           if (Array.isArray(data)) {
@@ -424,7 +424,7 @@ const App = () => {
               }).catch(console.warn);
 
               // Sync to backend
-              fetch('/api/subscriptions/use-credit', {
+              fetch(API_URL + '/api/subscriptions/use-credit', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email: formattedEmail })
@@ -479,7 +479,7 @@ Please purchase a new plan to continue posting jobs.`);
                   body: JSON.stringify({ status: 'paid', isFeatured: false, paymentInfo: { method: 'plan_credit', amount: 0, planName: 'Plan Credit', paidAt: new Date().toISOString() } })
                 }).catch(console.warn);
 
-                fetch('/api/subscriptions/use-credit', {
+                fetch(API_URL + '/api/subscriptions/use-credit', {
                   method: 'POST',
                   headers: { 'Content-Type': 'application/json' },
                   body: JSON.stringify({ email: formattedEmail })
@@ -666,3 +666,5 @@ You have ${newRemaining} more free job posts remaining in your plan.`);
 };
 
 export default App;
+
+

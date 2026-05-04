@@ -51,7 +51,7 @@ export const RecruiterDashboard = ({ onBack, onPostJob, onNavigate }) => {
       localStorage.setItem('recruiter_company', profileForm.company);
       localStorage.setItem('recruiter_mobile', profileForm.mobile);
       localStorage.setItem('recruiter_location', profileForm.location);
-      await fetch('/api/companies', {
+      await fetch(API_URL + '/api/companies', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name: profileForm.company, industry: 'Recruitment', email: localStorage.getItem('recruiter_email') || '', status: 'Active', location: profileForm.location })
@@ -64,7 +64,7 @@ export const RecruiterDashboard = ({ onBack, onPostJob, onNavigate }) => {
     const recruiterEmail = String(localStorage.getItem('recruiter_email') || '').trim().toLowerCase();
     
     // Fetch Applications
-    fetch('/api/applications')
+    fetch(API_URL + '/api/applications')
       .then(res => res.json())
       .then(data => {
         if (Array.isArray(data)) {
@@ -89,7 +89,7 @@ export const RecruiterDashboard = ({ onBack, onPostJob, onNavigate }) => {
       .catch(console.error);
 
     // Fetch My Vacancies
-    fetch('/api/admin/jobs')
+    fetch(API_URL + '/api/admin/jobs')
       .then(res => res.json())
       .then(data => {
         if (Array.isArray(data)) {
@@ -101,7 +101,7 @@ export const RecruiterDashboard = ({ onBack, onPostJob, onNavigate }) => {
       .finally(() => setLoading(false));
 
     // Fetch My Transactions
-    fetch('/api/transactions')
+    fetch(API_URL + '/api/transactions')
       .then(res => res.json())
       .then(data => {
         if (Array.isArray(data)) {
@@ -135,7 +135,7 @@ export const RecruiterDashboard = ({ onBack, onPostJob, onNavigate }) => {
         type: newStatus === 'Rejected' ? 'error' : 'success'
       };
       
-      const res = await fetch('/api/notifications', {
+      const res = await fetch(API_URL + '/api/notifications', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(notifData)
@@ -525,3 +525,5 @@ export const RecruiterDashboard = ({ onBack, onPostJob, onNavigate }) => {
     </div>
   );
 };
+
+

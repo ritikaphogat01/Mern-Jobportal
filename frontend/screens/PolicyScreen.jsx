@@ -111,3 +111,5 @@ export const PolicyScreen = ({ type, onBack }) => {
     </div>
   );
 };
+
+

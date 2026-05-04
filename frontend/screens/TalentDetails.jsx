@@ -78,3 +78,5 @@ export const TalentDetails = ({ talent, onBack }) => {
     </div>
   );
 };
+
+

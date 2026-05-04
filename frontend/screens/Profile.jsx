@@ -28,7 +28,7 @@ export const Profile = ({ onBack, onNavigate, hasPaidJob = false }) => {
     setProfile(prev => ({ ...prev, photoUrl: '' }));
     localStorage.removeItem('candidate_photo');
     try {
-      const resList = await fetch('/api/candidates');
+      const resList = await fetch(API_URL + '/api/candidates');
       const candidates = await resList.json();
       const existing = candidates.find((c) => c.mobile === profile.mobile);
       if (existing) {
@@ -52,7 +52,7 @@ export const Profile = ({ onBack, onNavigate, hasPaidJob = false }) => {
     formData.append('file', file);
 
     try {
-      const res = await fetch('/api/upload', {
+      const res = await fetch(API_URL + '/api/upload', {
         method: 'POST',
         body: formData
       });
@@ -62,7 +62,7 @@ export const Profile = ({ onBack, onNavigate, hasPaidJob = false }) => {
         localStorage.setItem('candidate_photo', data.url);
         
         // Auto-save the photo to backend
-        const resList = await fetch('/api/candidates');
+        const resList = await fetch(API_URL + '/api/candidates');
         const candidates = await resList.json();
         const existing = candidates.find((c) => c.mobile === profile.mobile);
         if (existing) {
@@ -90,7 +90,7 @@ export const Profile = ({ onBack, onNavigate, hasPaidJob = false }) => {
     formData.append('file', file);
 
     try {
-      const res = await fetch('/api/upload', {
+      const res = await fetch(API_URL + '/api/upload', {
         method: 'POST',
         body: formData
       });
@@ -100,7 +100,7 @@ export const Profile = ({ onBack, onNavigate, hasPaidJob = false }) => {
         localStorage.setItem('candidate_resume', data.url);
         
         // Auto-save the resume to backend
-        const resList = await fetch('/api/candidates');
+        const resList = await fetch(API_URL + '/api/candidates');
         const candidates = await resList.json();
         const existing = candidates.find((c) => c.mobile === profile.mobile);
         if (existing) {
@@ -124,7 +124,7 @@ export const Profile = ({ onBack, onNavigate, hasPaidJob = false }) => {
     if (!window.confirm('Are you sure you want to delete your resume?')) return;
     setProfile(prev => ({ ...prev, resumeUrl: '' }));
     try {
-      const resList = await fetch('/api/candidates');
+      const resList = await fetch(API_URL + '/api/candidates');
       const candidates = await resList.json();
       const existing = candidates.find((c) => c.mobile === profile.mobile);
       if (existing) {
@@ -147,7 +147,7 @@ export const Profile = ({ onBack, onNavigate, hasPaidJob = false }) => {
     const mobile = localStorage.getItem('candidate_mobile');
     if (!mobile) return;
 
-    fetch('/api/candidates')
+    fetch(API_URL + '/api/candidates')
       .then(res => res.json())
       .then(data => {
         const myProfile = data.find((c) => c.mobile === mobile);
@@ -192,12 +192,12 @@ export const Profile = ({ onBack, onNavigate, hasPaidJob = false }) => {
       // Find if candidate exists to PUT, else POST
       let existing = null;
       if (candidateId) {
-        const resList = await fetch('/api/candidates');
+        const resList = await fetch(API_URL + '/api/candidates');
         const candidates = await resList.json();
         existing = candidates.find((c) => (c._id || c.id) === candidateId);
       } else {
         // Fallback search by mobile if no ID yet
-        const resList = await fetch('/api/candidates');
+        const resList = await fetch(API_URL + '/api/candidates');
         const candidates = await resList.json();
         existing = candidates.find((c) => c.mobile === profile.mobile);
       }
@@ -209,7 +209,7 @@ export const Profile = ({ onBack, onNavigate, hasPaidJob = false }) => {
           body: JSON.stringify({ ...existing, ...profile, status: 'Active', email: profile.mobile })
         });
       } else {
-        await fetch('/api/candidates', {
+        await fetch(API_URL + '/api/candidates', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ 
@@ -693,3 +693,5 @@ export const Profile = ({ onBack, onNavigate, hasPaidJob = false }) => {
     </div>
   );
 };
+
+

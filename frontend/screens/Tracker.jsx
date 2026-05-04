@@ -13,8 +13,8 @@ export const Tracker = ({ onBack }) => {
     const fetchData = async () => {
       try {
         const [appsRes, jobsRes] = await Promise.all([
-          fetch('/api/applications'),
-          fetch('/api/admin/jobs') // Fetch all jobs to ensure we have company names/titles for everything
+          fetch(API_URL + '/api/applications'),
+          fetch(API_URL + '/api/admin/jobs') // Fetch all jobs to ensure we have company names/titles for everything
         ]);
 
         const appsData = await appsRes.json();
@@ -156,3 +156,5 @@ export const Tracker = ({ onBack }) => {
     </div>
   );
 };
+
+

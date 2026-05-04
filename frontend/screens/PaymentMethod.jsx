@@ -13,7 +13,7 @@ export const PaymentMethod = ({ jobId, planId, planName, amount, isBoosted, coup
     setProcessing(true);
 
     try {
-      const response = await fetch('/api/payments/create-order', {
+      const response = await fetch(API_URL + '/api/payments/create-order', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ amount: finalAmount, currency: 'INR' })
@@ -29,7 +29,7 @@ export const PaymentMethod = ({ jobId, planId, planName, amount, isBoosted, coup
       const handlerCallback = async (response) => {
         try {
           setProcessing(true);
-          const verifyRes = await fetch('/api/payments/verify', {
+          const verifyRes = await fetch(API_URL + '/api/payments/verify', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ ...response, jobId })
@@ -40,7 +40,7 @@ export const PaymentMethod = ({ jobId, planId, planName, amount, isBoosted, coup
             // Update Coupon Count if used
             if (couponCode) {
                try {
-                 const cRes = await fetch('/api/coupons');
+                 const cRes = await fetch(API_URL + '/api/coupons');
                  const coupons = await cRes.json();
                  const c = coupons.find((x) => x.code === couponCode);
                  if (c) {
@@ -82,7 +82,7 @@ export const PaymentMethod = ({ jobId, planId, planName, amount, isBoosted, coup
               localStorage.setItem(`recruiter_used_${email}`, '1'); // First post = this job
 
               // Also save backend subscription
-              await fetch('/api/subscriptions', {
+              await fetch(API_URL + '/api/subscriptions', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -100,7 +100,7 @@ export const PaymentMethod = ({ jobId, planId, planName, amount, isBoosted, coup
               }).catch(console.warn);
             }
 
-            await fetch('/api/transactions', {
+            await fetch(API_URL + '/api/transactions', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({
@@ -269,3 +269,5 @@ export const PaymentMethod = ({ jobId, planId, planName, amount, isBoosted, coup
     </div>
   );
 };
+
+

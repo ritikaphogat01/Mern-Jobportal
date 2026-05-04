@@ -12,7 +12,7 @@ export const Chats = () => {
   const messagesEndRef = useRef(null);
 
   useEffect(() => {
-    fetch('/api/conversations')
+    fetch(API_URL + '/api/conversations')
       .then(r => r.json())
       .then(data => { setConversations(data); setLoading(false); })
       .catch(() => setLoading(false));
@@ -286,3 +286,5 @@ export const Chats = () => {
     </div>
   );
 };
+
+

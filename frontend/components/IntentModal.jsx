@@ -44,3 +44,5 @@ export const IntentModal = ({ onClose, onSelect }) => {
     </div>
   );
 };
+
+

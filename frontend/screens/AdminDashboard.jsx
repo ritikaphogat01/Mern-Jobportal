@@ -158,7 +158,7 @@ export const AdminDashboard = ({ onBack }) => {
           setPlans(prev => prev.map(p => ((p)._id || p.id) === ((editingPlan)._id || editingPlan.id) ? updated : p));
         }
       } else {
-        const res = await fetch('/api/plans', {
+        const res = await fetch(API_URL + '/api/plans', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload),
@@ -330,7 +330,7 @@ export const AdminDashboard = ({ onBack }) => {
           setSubscriptions(prev => prev.map(s => ((s)._id || s.id) === id ? updated : s));
         }
       } else {
-        const res = await fetch('/api/subscriptions', {
+        const res = await fetch(API_URL + '/api/subscriptions', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(subForm),
@@ -397,7 +397,7 @@ export const AdminDashboard = ({ onBack }) => {
         const res = await fetch(`/api/transactions/${id}`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ...txForm, amount: Number(txForm.amount) }) });
         if (res.ok) { const updated = await res.json(); setTransactions(prev => prev.map(t => ((t)._id || t.id) === id ? updated : t)); }
       } else {
-        const res = await fetch('/api/transactions', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ...txForm, amount: Number(txForm.amount) }) });
+        const res = await fetch(API_URL + '/api/transactions', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ...txForm, amount: Number(txForm.amount) }) });
         if (res.ok) { const created = await res.json(); setTransactions(prev => [...prev, created]); }
       }
       setShowTxModal(false);
@@ -449,7 +449,7 @@ export const AdminDashboard = ({ onBack }) => {
         const res = await fetch(`/api/coupons/${id}`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
         if (res.ok) { const updated = await res.json(); setCoupons(prev => prev.map(c => ((c)._id || c.id) === id ? updated : c)); }
       } else {
-        const res = await fetch('/api/coupons', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+        const res = await fetch(API_URL + '/api/coupons', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
         if (res.ok) { const created = await res.json(); setCoupons(prev => [...prev, created]); }
       }
       setShowCouponModal(false);
@@ -492,7 +492,7 @@ export const AdminDashboard = ({ onBack }) => {
       let finalLogoUrl = companyForm.logoUrl;
       if (companyLogoFile) {
         const fd = new FormData(); fd.append('file', companyLogoFile);
-        const uploadRes = await fetch('/api/upload', { method: 'POST', body: fd });
+        const uploadRes = await fetch(API_URL + '/api/upload', { method: 'POST', body: fd });
         const uploadData = await uploadRes.json();
         if (uploadData.success) finalLogoUrl = uploadData.url;
       }
@@ -504,7 +504,7 @@ export const AdminDashboard = ({ onBack }) => {
         const res = await fetch(`/api/companies/${id}`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
         if (res.ok) { const updated = await res.json(); setCompanies(prev => prev.map(c => ((c)._id || c.id) === id ? updated : c)); }
       } else {
-        const res = await fetch('/api/companies', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+        const res = await fetch(API_URL + '/api/companies', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
         if (res.ok) { const created = await res.json(); setCompanies(prev => [...prev, created]); }
       }
       setShowCompanyModal(false);
@@ -564,7 +564,7 @@ export const AdminDashboard = ({ onBack }) => {
         const res = await fetch(`/api/candidates/${id}`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(candidateForm) });
         if (res.ok) { const updated = await res.json(); setCandidates(prev => prev.map(c => ((c)._id || c.id) === id ? updated : c)); }
       } else {
-        const res = await fetch('/api/candidates', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(candidateForm) });
+        const res = await fetch(API_URL + '/api/candidates', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(candidateForm) });
         if (res.ok) { const created = await res.json(); setCandidates(prev => [...prev, created]); }
       }
       setShowCandidateModal(false);
@@ -604,7 +604,7 @@ export const AdminDashboard = ({ onBack }) => {
         const res = await fetch(`/api/flaggeditems/${id}`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(flagForm) });
         if (res.ok) { const updated = await res.json(); setFlaggedItems(prev => prev.map(f => ((f)._id || f.id) === id ? updated : f)); }
       } else {
-        const res = await fetch('/api/flaggeditems', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(flagForm) });
+        const res = await fetch(API_URL + '/api/flaggeditems', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(flagForm) });
         if (res.ok) { const created = await res.json(); setFlaggedItems(prev => [created, ...prev]); }
       }
       setShowFlagModal(false);
@@ -650,7 +650,7 @@ export const AdminDashboard = ({ onBack }) => {
     if (!auditForm.action.trim()) return;
     setAuditSaving(true);
     try {
-      const res = await fetch('/api/auditlogs', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(auditForm) });
+      const res = await fetch(API_URL + '/api/auditlogs', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(auditForm) });
       if (res.ok) { const created = await res.json(); setAuditLogs(prev => [created, ...prev]); }
       setShowAuditModal(false);
     } catch (err) { console.error('Failed to save audit log', err); }
@@ -678,18 +678,18 @@ export const AdminDashboard = ({ onBack }) => {
   const loadAdminData = async () => {
     try {
       const [plansRes, subsRes, txRes, cpRes, logsRes, menuRes, companiesRes, candidatesRes, catRes, flaggedRes, jobsRes, appsRes] = await Promise.all([
-        fetch('/api/plans'),
-        fetch('/api/subscriptions'),
-        fetch('/api/transactions'),
-        fetch('/api/coupons'),
-        fetch('/api/auditlogs'),
-        fetch('/api/admin/menu'),
-        fetch('/api/companies'),
-        fetch('/api/candidates'),
-        fetch('/api/categories'),
-        fetch('/api/flaggeditems'),
-        fetch('/api/admin/jobs'),
-        fetch('/api/applications')
+        fetch(API_URL + '/api/plans'),
+        fetch(API_URL + '/api/subscriptions'),
+        fetch(API_URL + '/api/transactions'),
+        fetch(API_URL + '/api/coupons'),
+        fetch(API_URL + '/api/auditlogs'),
+        fetch(API_URL + '/api/admin/menu'),
+        fetch(API_URL + '/api/companies'),
+        fetch(API_URL + '/api/candidates'),
+        fetch(API_URL + '/api/categories'),
+        fetch(API_URL + '/api/flaggeditems'),
+        fetch(API_URL + '/api/admin/jobs'),
+        fetch(API_URL + '/api/applications')
       ]);
       if (plansRes.ok) setPlans(await plansRes.json());
       if (subsRes.ok) setSubscriptions(await subsRes.json());
@@ -1592,7 +1592,7 @@ export const AdminDashboard = ({ onBack }) => {
                           const formData = new FormData();
                           formData.append('file', file);
                           try {
-                            const res = await fetch('/api/upload', { method: 'POST', body: formData });
+                            const res = await fetch(API_URL + '/api/upload', { method: 'POST', body: formData });
                             const data = await res.json();
                             if (data.url) setCategoryForm({ ...categoryForm, imageUrl: data.url });
                           } catch (err) {
@@ -1907,11 +1907,11 @@ export const AdminDashboard = ({ onBack }) => {
         if (res.ok) {
            // We'd ideally want to update the full job, but the API might only support status update.
            // For now, let's just refresh adminJobs
-           const newJobsRes = await fetch('/api/admin/jobs');
+           const newJobsRes = await fetch(API_URL + '/api/admin/jobs');
            if (newJobsRes.ok) setAdminJobs(await newJobsRes.json());
         }
       } else {
-        const res = await fetch('/api/jobs', {
+        const res = await fetch(API_URL + '/api/jobs', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
@@ -3132,3 +3132,5 @@ export const AdminDashboard = ({ onBack }) => {
     </div>
   );
 };
+
+

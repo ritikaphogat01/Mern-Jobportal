@@ -10,8 +10,8 @@ export default defineConfig(({ mode }) => {
         host: '0.0.0.0',
         allowedHosts: true,
         proxy: {
-          '/api': 'http://127.0.0.1:3001',
-          '/uploads': 'http://127.0.0.1:3001'
+          '/api': 'https://mern-jobportal-1-ngjd.onrender.com',
+          '/uploads': 'https://mern-jobportal-1-ngjd.onrender.com'
         }
       },
       plugins: [react()],
@@ -19,6 +19,7 @@ export default defineConfig(({ mode }) => {
         'process.env.API_KEY': JSON.stringify(env.GEMINI_API_KEY || ""),
         'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY || ""),
         'import.meta.env.VITE_RAZORPAY_KEY_ID': JSON.stringify(env.VITE_RAZORPAY_KEY_ID || ""),
+        'API_URL': JSON.stringify("https://mern-jobportal-1-ngjd.onrender.com"),
       },
       resolve: {
         alias: {

@@ -24,7 +24,7 @@ export const ApplyForm = ({ job, onClose, onSubmit }) => {
         const formData = new FormData();
         formData.append('file', selectedFile);
         
-        const uploadRes = await fetch('/api/upload', {
+        const uploadRes = await fetch(API_URL + '/api/upload', {
           method: 'POST',
           body: formData
         });
@@ -193,3 +193,5 @@ export const ApplyForm = ({ job, onClose, onSubmit }) => {
     </div>
   );
 };
+
+

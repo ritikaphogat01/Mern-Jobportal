@@ -7,7 +7,7 @@ export const AllCategories = ({ onBack, onSelectCategory }) => {
   const [showSearch, setShowSearch] = useState(false);
 
   useEffect(() => {
-    fetch('/api/categories')
+    fetch(API_URL + '/api/categories')
       .then(res => res.json())
       .then(data => {
         if (Array.isArray(data)) {
@@ -79,3 +79,5 @@ export const AllCategories = ({ onBack, onSelectCategory }) => {
     </div>
   );
 };
+
+

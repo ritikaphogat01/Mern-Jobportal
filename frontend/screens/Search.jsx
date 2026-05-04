@@ -55,7 +55,7 @@ export const Search = ({
 
   React.useEffect(() => {
     // Fetch categories to understand parent/subcategory hierarchy
-    fetch('/api/categories')
+    fetch(API_URL + '/api/categories')
       .then(res => res.json())
       .then(data => setCategoriesData(data))
       .catch(console.error);
@@ -518,3 +518,5 @@ export const Search = ({
     </div>
   );
 };
+
+

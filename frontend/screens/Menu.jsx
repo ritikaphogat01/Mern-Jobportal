@@ -33,7 +33,7 @@ export const Menu = ({ onBack, onDownload, onNavigate, hasApprovedJob = false, h
     }
 
     if (mobile) {
-      fetch('/api/candidates')
+      fetch(API_URL + '/api/candidates')
         .then(res => res.json())
         .then(data => {
           const cand = data.find((c) => c.mobile === mobile);
@@ -142,3 +142,5 @@ export const Menu = ({ onBack, onDownload, onNavigate, hasApprovedJob = false, h
     </div>
   );
 };
+
+

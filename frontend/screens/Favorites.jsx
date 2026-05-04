@@ -66,7 +66,7 @@ export const Favorites = ({ onSelectJob, onBack, favorites, onToggleFavorite, on
 
 
   React.useEffect(() => {
-    fetch('/api/applications')
+    fetch(API_URL + '/api/applications')
       .then(res => res.json())
       .then(data => {
         const counts = {};
@@ -240,3 +240,5 @@ export const Favorites = ({ onSelectJob, onBack, favorites, onToggleFavorite, on
     </div>
   );
 };
+
+

@@ -27,7 +27,7 @@ export const RecruiterAuth = ({ onBack, onSuccess, pendingJobId }) => {
     try {
       if (!isLogin) {
         // Sign up user first
-        const regRes = await fetch('/api/register', {
+        const regRes = await fetch(API_URL + '/api/register', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -47,7 +47,7 @@ export const RecruiterAuth = ({ onBack, onSuccess, pendingJobId }) => {
         }
 
         // Create company record in MongoDB backend when recruiter signs up
-        await fetch('/api/companies', {
+        await fetch(API_URL + '/api/companies', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -59,7 +59,7 @@ export const RecruiterAuth = ({ onBack, onSuccess, pendingJobId }) => {
         }).catch(console.warn);
 
         // Welcome Notification for Recruiter
-        await fetch('/api/notifications', {
+        await fetch(API_URL + '/api/notifications', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -70,7 +70,7 @@ export const RecruiterAuth = ({ onBack, onSuccess, pendingJobId }) => {
         }).catch(console.warn);
       } else {
         // Login user
-        const loginRes = await fetch('/api/login', {
+        const loginRes = await fetch(API_URL + '/api/login', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -233,3 +233,5 @@ export const RecruiterAuth = ({ onBack, onSuccess, pendingJobId }) => {
     </div>
   );
 };
+
+

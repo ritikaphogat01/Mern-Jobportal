@@ -15,7 +15,7 @@ export const PackageSelection = ({ jobId, isBoosted, onBack, onNext }) => {
   useEffect(() => {
     setLoading(true);
     // Fetch Plans
-    fetch('/api/plans')
+    fetch(API_URL + '/api/plans')
       .then(res => res.json())
       .then(data => {
         const recruiterPlans = data.filter((p) => p.role === 'EMPLOYER' || p.role === 'Recruiter');
@@ -25,7 +25,7 @@ export const PackageSelection = ({ jobId, isBoosted, onBack, onNext }) => {
       .catch(() => setLoading(false));
 
     // Fetch Coupons
-    fetch('/api/coupons')
+    fetch(API_URL + '/api/coupons')
       .then(res => res.json())
       .then(data => {
         const valid = data.filter((c) => 
@@ -316,3 +316,5 @@ export const PackageSelection = ({ jobId, isBoosted, onBack, onNext }) => {
     </div>
   );
 };
+
+

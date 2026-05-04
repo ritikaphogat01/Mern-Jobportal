@@ -42,7 +42,7 @@ export const PostJob = ({ initialCategory, initialSubCategory, onBack, onPostSuc
   };
 
   React.useEffect(() => {
-    fetch('/api/categories')
+    fetch(API_URL + '/api/categories')
       .then(res => res.json())
       .then(data => {
         if (Array.isArray(data)) setCategories(data);
@@ -84,14 +84,14 @@ export const PostJob = ({ initialCategory, initialSubCategory, onBack, onPostSuc
           if (logoFile) {
             const fd = new FormData();
             fd.append('file', logoFile);
-            const uploadRes = await fetch('/api/upload', { method: 'POST', body: fd });
+            const uploadRes = await fetch(API_URL + '/api/upload', { method: 'POST', body: fd });
             const uploadData = await uploadRes.json();
             if (uploadData.success) companyLogo = uploadData.url;
           }
           if (jobImageFile) {
             const fd2 = new FormData();
             fd2.append('file', jobImageFile);
-            const uploadRes2 = await fetch('/api/upload', { method: 'POST', body: fd2 });
+            const uploadRes2 = await fetch(API_URL + '/api/upload', { method: 'POST', body: fd2 });
             const uploadData2 = await uploadRes2.json();
             if (uploadData2.success) imageUrl = uploadData2.url;
           }
@@ -107,7 +107,7 @@ export const PostJob = ({ initialCategory, initialSubCategory, onBack, onPostSuc
       const payload = { ...form, category: finalCategory, companyLogo, imageUrl, status: 'pending', recruiterEmail };
       
       try {
-        const res = await fetch('/api/jobs', {
+        const res = await fetch(API_URL + '/api/jobs', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
@@ -431,3 +431,5 @@ export const PostJob = ({ initialCategory, initialSubCategory, onBack, onPostSuc
     </div>
   );
 };
+
+

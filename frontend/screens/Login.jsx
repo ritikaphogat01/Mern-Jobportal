@@ -60,7 +60,7 @@ export const Login = ({ onLogin }) => {
         localStorage.setItem('candidate_phone', data.user.phone || '');
 
         // Notification hit
-        fetch('/api/notifications', {
+        fetch(API_URL + '/api/notifications', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ 
@@ -291,3 +291,5 @@ export const Login = ({ onLogin }) => {
     </div>
   );
 };
+
+

@@ -9,7 +9,7 @@ export const JobDetails = ({ job, onBack, favorites, onToggleFavorite, onShare }
 
   useEffect(() => {
     // Fetch applicant count
-    fetch('/api/applications')
+    fetch(API_URL + '/api/applications')
       .then(res => res.json())
       .then(data => {
         const count = data.filter((a) => 
@@ -214,7 +214,7 @@ export const JobDetails = ({ job, onBack, favorites, onToggleFavorite, onShare }
           onSubmit={async (resumeUrl, name, email, qualification, expectedSalary, phone) => {
             try {
               const accountMobile = localStorage.getItem('candidate_mobile') || '';
-              await fetch('/api/applications', {
+              await fetch(API_URL + '/api/applications', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -264,3 +264,5 @@ export const JobDetails = ({ job, onBack, favorites, onToggleFavorite, onShare }
     </div>
   );
 };
+
+

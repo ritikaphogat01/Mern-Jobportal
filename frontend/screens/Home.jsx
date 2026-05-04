@@ -98,7 +98,7 @@ export const Home = ({
 
   // Fetch categories from API dynamically
   React.useEffect(() => {
-    fetch('/api/categories')
+    fetch(API_URL + '/api/categories')
       .then(res => {
         if (!res.ok || !res.headers.get('content-type')?.includes('application/json')) throw new Error('API Error');
         return res.json();
@@ -666,3 +666,5 @@ export const Home = ({
     </div>
   );
 };
+
+

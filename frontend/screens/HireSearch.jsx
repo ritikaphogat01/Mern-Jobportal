@@ -7,7 +7,7 @@ export const HireSearch = ({ initialCategory, onPostJob, onBack }) => {
   const [loading, setLoading] = useState(true);
 
   React.useEffect(() => {
-    fetch('/api/categories')
+    fetch(API_URL + '/api/categories')
       .then(res => res.json())
       .then(data => {
         setCategories(data);
@@ -76,3 +76,5 @@ export const HireSearch = ({ initialCategory, onPostJob, onBack }) => {
     </div>
   );
 };
+
+

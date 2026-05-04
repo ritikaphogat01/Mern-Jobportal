@@ -121,3 +121,5 @@ export const CompanyProfile = ({ onBack, onNavigate }) => {
     </div>
   );
 };
+
+
