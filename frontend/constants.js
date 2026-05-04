@@ -1,5 +1,6 @@
 
 export const API_URL = "https://mern-jobportal-1-ngjd.onrender.com";
+export const UPLOAD_URL = "https://mern-jobportal-1-ngjd.onrender.com";
 
 export const MOCK_CATEGORIES = [
   {

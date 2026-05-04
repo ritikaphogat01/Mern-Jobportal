@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MOCK_CATEGORIES } from '../constants';
+import { MOCK_CATEGORIES, UPLOAD_URL } from '../constants';
 import { AppScreen } from '../types';
 
 export const Home = ({ 
@@ -240,7 +240,7 @@ export const Home = ({
                 {/* Blurred Banner Background */}
                 {job.imageUrl ? (
                   <div className="absolute inset-0 z-0">
-                    <img src={job.imageUrl} alt="" className="w-full h-full object-cover blur-[2px] opacity-70 group-hover:opacity-80 transition-opacity" />
+                    <img src={job.imageUrl?.startsWith('http') ? job.imageUrl : `${UPLOAD_URL}${job.imageUrl}`} alt="" className="w-full h-full object-cover blur-[2px] opacity-70 group-hover:opacity-80 transition-opacity" />
                     <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/40 to-black/70" />
                   </div>
                 ) : null}
@@ -250,7 +250,7 @@ export const Home = ({
                   <div className="flex items-start justify-between mb-4">
                     <div className={`w-14 h-14 ${job.imageUrl ? 'bg-white/20 backdrop-blur-sm border-white/30' : 'bg-gray-50 border-gray-100'} rounded-2xl flex items-center justify-center border group-hover:scale-110 transition-transform overflow-hidden`}>
                       {job.companyLogo ? (
-                        <img src={job.companyLogo} className="w-full h-full object-cover" />
+                        <img src={job.companyLogo?.startsWith('http') ? job.companyLogo : `${UPLOAD_URL}${job.companyLogo}`} className="w-full h-full object-cover" />
                       ) : (
                         <span className={`material-icons-round text-2xl ${job.imageUrl ? 'text-white' : 'text-primary/40'}`}>apartment</span>
                       )}
@@ -344,7 +344,7 @@ export const Home = ({
             >
               <div className="h-28 w-full bg-gray-50 overflow-hidden relative border-b border-gray-50 flex items-center justify-center shrink-0">
                 {cat.imageUrl ? (
-                  <img src={cat.imageUrl} alt={cat.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <img src={cat.imageUrl?.startsWith('http') ? cat.imageUrl : `${UPLOAD_URL}${cat.imageUrl}`} alt={cat.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center text-gray-300">
                      <span className="material-icons-round text-[4rem] opacity-30 group-hover:scale-110 transition-transform">{cat.icon || 'business'}</span>
@@ -394,7 +394,7 @@ export const Home = ({
                 <div className="flex justify-between items-start mb-1">
                   <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center border border-gray-100 overflow-hidden shrink-0">
                     {job.companyLogo ? (
-                      <img src={job.companyLogo} alt={job.company} className="w-full h-full object-cover" />
+                      <img src={job.companyLogo?.startsWith('http') ? job.companyLogo : `${UPLOAD_URL}${job.companyLogo}`} alt={job.company} className="w-full h-full object-cover" />
                     ) : (
                       <span className="material-icons-round text-primary/40 text-xl">apartment</span>
                     )}

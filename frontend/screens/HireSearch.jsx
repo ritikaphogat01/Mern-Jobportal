@@ -1,5 +1,6 @@
 
 import React, { useState } from 'react';
+import { UPLOAD_URL } from '../constants';
 
 export const HireSearch = ({ initialCategory, onPostJob, onBack }) => {
   const [selectedCategory, setSelectedCategory] = useState(initialCategory || null);
@@ -61,7 +62,7 @@ export const HireSearch = ({ initialCategory, onPostJob, onBack }) => {
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 rounded-2xl bg-gray-50 flex items-center justify-center border border-gray-100 group-hover:bg-white group-hover:border-primary/20 transition-all shadow-sm overflow-hidden p-0">
                   {item.imageUrl ? (
-                    <img src={item.imageUrl} alt={item.name} className="w-full h-full object-cover" />
+                    <img src={item.imageUrl.startsWith('http') ? item.imageUrl : `${UPLOAD_URL}${item.imageUrl}`} alt={item.name} className="w-full h-full object-cover" />
                   ) : (
                     <span className="material-icons-round text-primary text-xl">{item.icon || (selectedCategory ? 'circle' : 'category')}</span>
                   )}

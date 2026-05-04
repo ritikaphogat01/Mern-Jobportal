@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { UPLOAD_URL } from '../constants';
 
 export const Favorites = ({ onSelectJob, onBack, favorites, onToggleFavorite, onShare, jobs }) => {
   const favoriteJobs = jobs.filter(job => favorites.includes(job.id));
@@ -124,7 +125,7 @@ export const Favorites = ({ onSelectJob, onBack, favorites, onToggleFavorite, on
               <div className="p-6 flex items-start gap-5">
                 <div className="w-16 h-16 rounded-[1.25rem] bg-primary-soft flex items-center justify-center shrink-0 border border-primary/5 group-hover:scale-105 transition-transform overflow-hidden">
                   {job.companyLogo ? (
-                    <img src={job.companyLogo} alt="Logo" className="w-full h-full object-cover" />
+                    <img src={job.companyLogo.startsWith('http') ? job.companyLogo : `${UPLOAD_URL}${job.companyLogo}`} alt="Logo" className="w-full h-full object-cover" />
                   ) : (
                     <span className="material-icons-round text-primary text-4xl">apartment</span>
                   )}
@@ -221,7 +222,7 @@ export const Favorites = ({ onSelectJob, onBack, favorites, onToggleFavorite, on
                <div key={job.id} onClick={() => onSelectJob(job)} className="p-4 bg-white rounded-3xl border border-gray-100 flex items-center gap-4 group cursor-pointer active:scale-95 transition-all shadow-sm relative">
                   <div className="w-12 h-12 bg-gray-50 rounded-xl flex items-center justify-center group-hover:bg-primary-soft overflow-hidden border border-gray-50">
                      {job.companyLogo ? (
-                       <img src={job.companyLogo} alt="Logo" className="w-full h-full object-cover" />
+                       <img src={job.companyLogo.startsWith('http') ? job.companyLogo : `${UPLOAD_URL}${job.companyLogo}`} alt="Logo" className="w-full h-full object-cover" />
                      ) : (
                        <span className="material-icons-round text-gray-700 group-hover:text-primary">apartment</span>
                      )}

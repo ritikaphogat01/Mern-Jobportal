@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { UPLOAD_URL } from '../constants';
 import { AppScreen } from '../types';
 
 export const Profile = ({ onBack, onNavigate, hasPaidJob = false }) => {
@@ -377,7 +378,7 @@ export const Profile = ({ onBack, onNavigate, hasPaidJob = false }) => {
                 className={`w-28 h-28 rounded-full bg-gradient-to-tr from-primary to-blue-500 overflow-hidden flex items-center justify-center text-white text-4xl font-display font-black shadow-xl border-4 border-white ${profile.photoUrl ? 'cursor-pointer hover:scale-105 transition-transform' : ''}`}
               >
                 {profile.photoUrl ? (
-                  <img src={profile.photoUrl} alt="Profile" className="w-full h-full object-cover" />
+                  <img src={profile.photoUrl.startsWith('http') ? profile.photoUrl : `${UPLOAD_URL}${profile.photoUrl}`} alt="Profile" className="w-full h-full object-cover" />
                 ) : (
                   profile.name ? profile.name.charAt(0).toUpperCase() : 'U'
                 )}
@@ -501,7 +502,7 @@ export const Profile = ({ onBack, onNavigate, hasPaidJob = false }) => {
              </div>
            ) : profile.resumeUrl ? (
              <div className="flex items-center justify-between bg-white p-4 rounded-[2rem] border border-gray-100 shadow-sm relative z-10">
-               <a href={profile.resumeUrl} target="_blank" rel="noreferrer" className="flex items-center gap-4 flex-1 hover:opacity-70 transition-opacity">
+               <a href={profile.resumeUrl.startsWith('http') ? profile.resumeUrl : `${UPLOAD_URL}${profile.resumeUrl}`} target="_blank" rel="noreferrer" className="flex items-center gap-4 flex-1 hover:opacity-70 transition-opacity">
                  <div className="w-10 h-10 rounded-xl bg-orange-50 flex items-center justify-center text-orange-600 border border-orange-100/50">
                    <span className="material-icons-round text-lg">picture_as_pdf</span>
                  </div>
@@ -670,7 +671,7 @@ export const Profile = ({ onBack, onNavigate, hasPaidJob = false }) => {
         >
           <div className="relative max-w-full max-h-full" onClick={e => e.stopPropagation()}>
             <img 
-              src={profile.photoUrl} 
+              src={profile.photoUrl.startsWith('http') ? profile.photoUrl : `${UPLOAD_URL}${profile.photoUrl}`} 
               alt="Profile FullView" 
               className="max-w-[80vw] max-h-[60vh] rounded-3xl shadow-2xl border-2 border-white/20" 
             />

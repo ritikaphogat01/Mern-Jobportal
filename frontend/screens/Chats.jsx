@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect, useRef } from 'react';
+import { UPLOAD_URL } from '../constants';
 
 export const Chats = () => {
   const [conversations, setConversations] = useState([]);
@@ -92,7 +93,7 @@ export const Chats = () => {
           </button>
           <div className="relative">
             {activeConv.participantAvatar ? (
-              <img src={activeConv.participantAvatar} alt="" className="w-10 h-10 rounded-2xl object-cover" />
+              <img src={activeConv.participantAvatar.startsWith('http') ? activeConv.participantAvatar : `${UPLOAD_URL}${activeConv.participantAvatar}`} alt="" className="w-10 h-10 rounded-2xl object-cover" />
             ) : (
               <div className="w-10 h-10 rounded-2xl bg-primary-soft flex items-center justify-center">
                 <span className="material-icons-round text-primary">person</span>
@@ -225,7 +226,7 @@ export const Chats = () => {
             <div className="p-5 flex items-center gap-4">
               <div className="relative shrink-0">
                 {chat.participantAvatar ? (
-                  <img src={chat.participantAvatar} alt="" className="w-14 h-14 rounded-2xl object-cover border border-gray-100" />
+                  <img src={chat.participantAvatar.startsWith('http') ? chat.participantAvatar : `${UPLOAD_URL}${chat.participantAvatar}`} alt="" className="w-14 h-14 rounded-2xl object-cover border border-gray-100" />
                 ) : (
                   <div className="w-14 h-14 rounded-2xl bg-primary-soft flex items-center justify-center border border-primary/10">
                     <span className="material-icons-round text-primary text-2xl">person</span>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ApplyForm } from '../components/ApplyForm';
+import { UPLOAD_URL } from '../constants';
 
 export const JobDetails = ({ job, onBack, favorites, onToggleFavorite, onShare }) => {
   const [showApplyForm, setShowApplyForm] = useState(false);
@@ -68,14 +69,14 @@ export const JobDetails = ({ job, onBack, favorites, onToggleFavorite, onShare }
       <main className="flex-1 overflow-y-auto no-scrollbar pb-10">
         {job.imageUrl && (
           <div className="w-full h-48 bg-gray-100 overflow-hidden relative z-0">
-            <img src={job.imageUrl} alt="Job Banner" className="w-full h-full object-cover" />
+            <img src={job.imageUrl?.startsWith('http') ? job.imageUrl : `${UPLOAD_URL}${job.imageUrl}`} alt="Job Banner" className="w-full h-full object-cover" />
           </div>
         )}
         <div className="px-6 pt-4 pb-6 relative z-10 w-full mt-[-20px] bg-white rounded-t-[1.5rem]">
           <div className="flex items-center gap-4 mb-4">
             {job.companyLogo && (
               <div className="w-16 h-16 rounded-2xl overflow-hidden border border-gray-100 shadow-sm bg-white shrink-0">
-                <img src={job.companyLogo} alt="Company Logo" className="w-full h-full object-cover" />
+                <img src={job.companyLogo?.startsWith('http') ? job.companyLogo : `${UPLOAD_URL}${job.companyLogo}`} alt="Company Logo" className="w-full h-full object-cover" />
               </div>
             )}
             <div>

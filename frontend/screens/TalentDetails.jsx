@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { UPLOAD_URL } from '../constants';
 
 export const TalentDetails = ({ talent, onBack }) => {
   return (
@@ -17,7 +18,7 @@ export const TalentDetails = ({ talent, onBack }) => {
       <main className="flex-1 overflow-y-auto no-scrollbar pb-32">
         <div className="bg-white pb-8 px-5 pt-8 rounded-b-[2rem] shadow-sm mb-4 flex flex-col items-center">
           <div className="relative mb-6">
-            <img src={talent.imageUrl} alt={talent.name} className="w-32 h-32 rounded-3xl object-cover border-4 border-white shadow-xl" />
+            <img src={talent.imageUrl.startsWith('http') ? talent.imageUrl : `${UPLOAD_URL}${talent.imageUrl}`} alt={talent.name} className="w-32 h-32 rounded-3xl object-cover border-4 border-white shadow-xl" />
             <div className="absolute -bottom-2 -right-2 bg-green-500 w-8 h-8 rounded-full border-4 border-white flex items-center justify-center">
               <span className="material-icons-round text-white text-xs">verified</span>
             </div>

@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import { UPLOAD_URL } from '../constants';
 
 export const Search = ({ 
   initialCategory, 
@@ -412,7 +413,7 @@ export const Search = ({
                   {/* Image Background */}
                   {job.imageUrl ? (
                     <div className="absolute inset-0 z-0">
-                      <img src={job.imageUrl} alt="" className="w-full h-full object-cover blur-[2px] opacity-70" />
+                      <img src={job.imageUrl.startsWith('http') ? job.imageUrl : `${UPLOAD_URL}${job.imageUrl}`} alt="" className="w-full h-full object-cover blur-[2px] opacity-70" />
                       <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/40 to-black/70" />
                     </div>
                   ) : (
@@ -423,7 +424,7 @@ export const Search = ({
                   <div className="relative z-10 p-5">
                     <div className={`w-12 h-12 ${job.imageUrl ? 'bg-white/20 backdrop-blur-sm border border-white/30' : 'bg-white/20 backdrop-blur-md'} rounded-2xl flex items-center justify-center mb-4 overflow-hidden`}>
                       {job.companyLogo ? (
-                        <img src={job.companyLogo} className="w-full h-full object-cover" />
+                        <img src={job.companyLogo.startsWith('http') ? job.companyLogo : `${UPLOAD_URL}${job.companyLogo}`} className="w-full h-full object-cover" />
                       ) : (
                         <span className="material-icons-round text-white text-2xl">apartment</span>
                       )}
@@ -463,7 +464,7 @@ export const Search = ({
                 <div className="flex justify-between items-start mb-1">
                   <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center border border-gray-100 overflow-hidden shrink-0">
                     {job.companyLogo ? (
-                      <img src={job.companyLogo} alt={job.company} className="w-full h-full object-cover" />
+                      <img src={job.companyLogo.startsWith('http') ? job.companyLogo : `${UPLOAD_URL}${job.companyLogo}`} alt={job.company} className="w-full h-full object-cover" />
                     ) : (
                       <span className="material-icons-round text-primary/40 text-xl">apartment</span>
                     )}

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { UPLOAD_URL } from '../constants';
 
 // default navigation structure (used as fallback)
 const defaultSitemap = [
@@ -482,7 +483,7 @@ export const AdminDashboard = ({ onBack }) => {
     setEditingCompany(c);
     setCompanyForm({ name: c.name || '', industry: c.industry || '', location: c.location || '', status: c.status || 'Pending', activeJobs: c.activeJobs || 0, email: c.email || '', website: c.website || '', logoUrl: c.logoUrl || '' });
     setCompanyLogoFile(null);
-    setCompanyLogoPreview(c.logoUrl || '');
+    setCompanyLogoPreview(c.logoUrl ? (c.logoUrl.startsWith('http') ? c.logoUrl : `${UPLOAD_URL}${c.logoUrl}`) : '');
     setShowCompanyModal(true);
   };
   const handleCompanySave = async () => {
@@ -1126,7 +1127,7 @@ export const AdminDashboard = ({ onBack }) => {
                   
                   <div className="flex justify-between items-start mb-6 relative">
                     <div className="w-14 h-14 bg-gray-50 rounded-2xl flex items-center justify-center text-primary group-hover:scale-110 transition-transform overflow-hidden">
-                      {c.logoUrl ? <img src={c.logoUrl} alt="Logo" className="w-full h-full object-cover" /> : <span className="material-icons-round text-2xl">business</span>}
+                      {c.logoUrl ? <img src={c.logoUrl.startsWith('http') ? c.logoUrl : `${UPLOAD_URL}${c.logoUrl}`} alt="Logo" className="w-full h-full object-cover" /> : <span className="material-icons-round text-2xl">business</span>}
                     </div>
                     <span className={`px-3 py-1 rounded-full text-[9px] font-black uppercase border ${c.status === 'Active' ? 'bg-emerald-50 text-emerald-600 border-emerald-100' : 'bg-red-50 text-primary border-primary/10'}`}>
                       {c.status || 'Active'}
@@ -1215,7 +1216,7 @@ export const AdminDashboard = ({ onBack }) => {
 
                 <div className="flex items-center gap-4">
                    {app.resumeUrl ? (
-                     <a href={app.resumeUrl} target="_blank" rel="noreferrer" className="px-6 py-4 bg-emerald-500 text-white rounded-2xl font-black text-[10px] uppercase tracking-widest shadow-premium shadow-emerald-500/20 active:scale-95 transition-all flex items-center gap-2">
+                     <a href={app.resumeUrl.startsWith('http') ? app.resumeUrl : `${UPLOAD_URL}${app.resumeUrl}`} target="_blank" rel="noreferrer" className="px-6 py-4 bg-emerald-500 text-white rounded-2xl font-black text-[10px] uppercase tracking-widest shadow-premium shadow-emerald-500/20 active:scale-95 transition-all flex items-center gap-2">
                         <span className="material-icons-round text-sm">description</span> View CV
                      </a>
                    ) : (
@@ -1530,7 +1531,7 @@ export const AdminDashboard = ({ onBack }) => {
                 <div className="flex justify-between items-start mb-6">
                   <div className="w-16 h-16 bg-primary-soft text-primary rounded-[1.5rem] flex items-center justify-center overflow-hidden">
                     {c.imageUrl ? (
-                      <img src={c.imageUrl} alt={c.name} className="w-full h-full object-cover" />
+                      <img src={c.imageUrl.startsWith('http') ? c.imageUrl : `${UPLOAD_URL}${c.imageUrl}`} alt={c.name} className="w-full h-full object-cover" />
                     ) : (
                       <span className="material-icons-round text-3xl">{c.icon || 'category'}</span>
                     )}
@@ -1582,7 +1583,7 @@ export const AdminDashboard = ({ onBack }) => {
                   <label className="block text-sm font-bold text-gray-900 mb-3">Category Image (Optional)</label>
                   <div className="flex items-center gap-4">
                     {categoryForm.imageUrl && (
-                      <img src={categoryForm.imageUrl} alt="Category" className="w-16 h-16 rounded-xl object-cover" />
+                      <img src={categoryForm.imageUrl.startsWith('http') ? categoryForm.imageUrl : `${UPLOAD_URL}${categoryForm.imageUrl}`} alt="Category" className="w-16 h-16 rounded-xl object-cover" />
                     )}
                     <label className="px-5 py-3 bg-gray-50 text-gray-700 rounded-xl border border-gray-200 cursor-pointer text-[10px] uppercase font-black tracking-widest hover:bg-gray-100 transition-colors">
                       {categoryForm.imageUrl ? 'Change Image' : 'Upload Image'}
@@ -3075,7 +3076,7 @@ export const AdminDashboard = ({ onBack }) => {
               <div className="flex items-center gap-6 pb-8 border-b border-gray-50">
                 <div className="w-20 h-20 rounded-[2rem] bg-primary/5 flex items-center justify-center border border-primary/10">
                   {selectedJobDetails.companyLogo ? (
-                    <img src={selectedJobDetails.companyLogo} className="w-full h-full object-cover rounded-[2rem]" alt="Logo" />
+                    <img src={selectedJobDetails.companyLogo.startsWith('http') ? selectedJobDetails.companyLogo : `${UPLOAD_URL}${selectedJobDetails.companyLogo}`} className="w-full h-full object-cover rounded-[2rem]" alt="Logo" />
                   ) : (
                     <span className="material-icons-round text-primary text-4xl">business</span>
                   )}

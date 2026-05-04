@@ -17,7 +17,10 @@ process.on('unhandledRejection', (reason, promise) => console.error('CRITICAL: U
 dotenv.config({ path: path.resolve(__dirname, '..', '.env.local') });
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: ['https://mern-jobportalproject.netlify.app', 'http://localhost:5173', 'http://localhost:3000'],
+  credentials: true
+}));
 app.use(express.json());
 
 // Request logger for debugging
@@ -26,8 +29,8 @@ app.use((req, res, next) => {
   next();
 });
 
-// Assets setup - Ensure uploads directory exists in public (for Vite access)
-const uploadsDir = path.resolve(__dirname, '..', 'frontend', 'public', 'uploads');
+// Assets setup - Ensure uploads directory exists in backend
+const uploadsDir = path.resolve(__dirname, 'uploads');
 if (!fs.existsSync(uploadsDir)) {
   fs.mkdirSync(uploadsDir, { recursive: true });
 }
