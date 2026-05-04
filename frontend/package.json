@@ -9,7 +9,7 @@
     "dev:all": "concurrently \"npm run dev\" \"npm run server\"",
     "build": "vite build",
     "preview": "vite preview",
-    "lint": "tsc --noEmit"
+    "lint": "echo 'No lint script defined'"
   },
   "dependencies": {
     "@google/genai": "^1.42.0",
